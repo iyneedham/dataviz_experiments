@@ -1,0 +1,54 @@
+source,target,edgeNumber
+Clinton '92,Clinton Admin,1
+Clinton '92,Clinton Admin,2
+Clinton '92,Clinton Admin,3
+Clinton '92,Kerry '04,1
+Clinton '96,Clinton Admin,1
+Clinton '96,Obama '08,1
+Clinton Admin,Clinton '96,1
+Clinton Admin,Clinton Senate '00,1
+Clinton Admin,Clinton Senate '00,2
+Clinton Admin,Edwards '04,1
+Clinton Senate '00,Clinton '08,1
+Edwards '04,Kerry '04,1
+Dean '04,Kerry '04,1
+Kerry '04,Clinton '08,1
+Obama '08,Obama '12,1
+Obama '08,Obama '12,2
+Obama '08,Obama '12,3
+Obama '08,Obama '12,4
+Obama '08,Obama '12,5
+Obama '08,Obama Admin,1
+Obama '08,Obama Admin,2
+Obama '08,Obama Admin,3
+Obama '08,McCauliffe '13,1
+Obama '08,Clinton State Dept,1
+Clinton '08,Obama '08,1
+Clinton '08,Obama '08,2
+Clinton '08,Obama '12,1
+Clinton '08,Obama '12,2
+Clinton '08,Center for Amer Progress,1
+Clinton '08,Obama Admin,1
+Clinton '08,Sen Clinton,1
+Clinton '08,Clinton State Dept,1
+Clinton '08,Clinton State Dept,2
+Clinton '08,Clinton State Dept,3
+Clinton '08,Clinton State Dept,4
+Clinton '08,Priorities USA,1
+Clinton '08,Priorities USA,2
+Clinton '08,Priorities USA,3
+Clinton '08,Priorities USA,4
+Obama '12,Obama Admin,1
+Obama '12,Priorities USA,1
+Obama '12,Priorities USA,2
+Obama '12,Center for Amer Progress,1
+Obama Admin,Obama '12,1
+Obama Admin,Obama '12,2
+Obama Admin,Priorities USA,1
+Center for Amer Progress,Priorities USA,1
+Sen Clinton,Clinton State Dept,1
+Sen Clinton,Clinton '08,1
+Sen Clinton,Clinton '08,2
+Clinton State Dept,Clinton Found,1
+Clinton State Dept,Clinton Found,2
+Clinton State Dept,Clinton Found,3

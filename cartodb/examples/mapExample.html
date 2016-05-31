@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+<title>Met Sacramento Internship Map</title>
+
+<!-- Style -->
+<style>
+  body { font-family: Arial, sans-serif; }
+  #map_canvas { height: 500px; width:600px; }
+</style>
+
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript">
+    var tableid = 567682;
+    var layer = new google.maps.FusionTablesLayer(567682);
+
+  function initialize() {
+    var latlng = new google.maps.LatLng(38.59970036588819, -121.541748046875);
+    var myOptions = {
+      zoom: 8,
+      center: latlng,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var map = new google.maps.Map(document.getElementById("map_canvas"),
+        myOptions);
+          layer.setMap(map);
+  }
+
+    function refreshFusion() {
+        var qry = "SELECT Address, 'Status' FROM " + tableid;
+        var interest = document.getElementById('ddlInterest').value;
+        var status = document.getElementById('ddlStatus').value;
+        var filters = [];
+        if(interest != '') {
+            filters.push("'Interest Area' CONTAINS '" + interest + "'");
+        }
+        if(status != '') {
+            filters.push("'Status' CONTAINS '" + status + "'");
+        }
+        if(filters.length > 0) {
+            qry += " WHERE " + filters.join(" AND ");
+        }
+        layer.setQuery(qry);
+    }
+</script>
+
+ </script>
+
+</head>
+<body onload="initialize();">
+  <p>Internship Status <select id="ddlInterest">
+    <option value="">Interest Areas</option>
+<option value="Aerospace">Aerospace</option>
+<option value="Animals">Animals</option>
+<option value="Architecture">Architecture</option>
+<option value="Art/Music/Theatre">Art/Music/Theatre</option>
+<option value="Athletics and Martial Arts">Athletics</option>
+<option value="Automotive and Transportation">Automotive</option>
+<option value="Bicycles">Bicycles</option>
+<option value="Business">Business</option>
+<option value="Community Development">Community Development</option>
+<option value="Computers">Computers</option>
+<option value="Cosmetology">Cosmetology</option>
+<option value="Culinary">Culinary</option>
+<option value="Education">Education</option>
+<option value="Government and Politics">Politics</option>
+<option value="Health Science">Health Science</option>
+<option value="Hospitality/Tourism/Event Planning">Event Planning</option>
+<option value="Law and Public Safety">Law and Public Safety</option>
+<option value="Marketing">Marketing</option>
+<option value="Media and Information Technology">Media</option>
+<option value="Photography">Photography</option>
+<option value="Science and Technology">Science and Technology
+</option>
+<option value="Social Services">Social Services</option>
+
+onchange="refreshFusion();"
+
+  </select>
+   Status <select id="ddlStatus">
+    <option value="">Status</option>
+<option value="BEING PURSUED">Being Pursued</option>
+<option value="HAS INTERN">Has Intern</option>
+<option value="NOT TAKING">Not Taking</option>
+<option value="OPPORTUNITY">Opportunity</option>
+<option value="OVER 18">Over 18</option>
+<option value="POTENTIAL?">Potential</option>
+<option value="SEE NOTES">See Notes</option>
+
+onchange="refreshFusion();"
+  </select>
+  <!-- <input type="button" value="Run Query" onclick="refreshFusion();" /> -->
+</p>
+  <div id="map_canvas"></div>
+
+</body>
+</html>
+
+<!-- http://stackoverflow.com/questions/6686980/fusion-table-google-maps-second-javascript-drop-down-menu-not-working -->

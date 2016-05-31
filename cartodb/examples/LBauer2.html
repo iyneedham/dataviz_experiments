@@ -1,0 +1,43 @@
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript">
+
+       //Function creates layers that house various pieces of the map.  Split into parts because US is so big.
+        function createFusionTableLayer(layer, table){
+            layer = new google.maps.FusionTablesLayer(table, {
+            //  suppressInfoWindows: true,
+              query: "select " + "*" + " from " + table
+            });
+            return layer;
+        }
+
+        //Function initializes layers by putting them on map,
+        function setMap(layer){
+            layer.setMap(map);
+        }
+</script>
+
+
+    <div id="gmap" style="width:1000px; padding-top:40px;height: 800px;">
+
+		<script type="text/javascript">
+	         map = new google.maps.Map(document.getElementById('gmap'), {
+	                center: new google.maps.LatLng(39.0533, 5),
+	                zoom: 2,
+	                mapTypeId: google.maps.MapTypeId.ROADMAP
+	            });
+
+		var layer0 = createFusionTableLayer(layer0, S1665102A5eo);
+                setMap(layer0);
+
+                var layer1 = createFusionTableLayer(layer1, S1665103GBLs);
+                setMap(layer1);
+
+                //var layer2 = createFusionTableLayer(layer2, 1325806);
+                //setMap(layer2);
+
+                //var layer3 = createFusionTableLayer(layer3, 1325564);
+                //setMap(layer3);
+		</script>
+
+
+    </div>

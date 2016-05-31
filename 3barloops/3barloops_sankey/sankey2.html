@@ -1,0 +1,84 @@
+<html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<body>
+ <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<div id="sankey_multiple" style="width: 900px; height: 775;"></div>
+
+<script type="text/javascript">
+  google.charts.load("current", {packages:["sankey"]});
+  google.charts.setOnLoadCallback(drawChart);
+   function drawChart() {
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'From');
+    data.addColumn('string', 'To');
+    data.addColumn('number', 'Songs');
+    data.addRows([
+       [ 'Alchemist (Producer)', 'Dilated Peoples', 1 ],
+       [ 'L.E.S. (Producer)', 'Nas', 1 ],
+       [ 'Prince Paul (Producer)', 'Prince Paul/Breeze Brewin/Sha', 1 ],
+       [ 'Supa Dave West (Producer)', 'De La Soul', 1 ],
+       [ 'J Dilla (Producer)', 'De La Soul', 2 ],
+       [ 'J Dilla (Producer)', 'Busta Rhymes', 1 ],
+       [ 'J Dilla (Producer)', 'Lucy Pearl', 1 ],
+       [ 'A Tribe Called Quest (Producer)', 'A Tribe Called Quest', 3 ],
+       [ 'Beatnuts (Producer)', 'Beatnuts', 1 ],
+       [ 'Q Tip (Producer)', 'Q Tip', 1 ],
+       [ 'Q Tip (Producer)', 'Mobb Deep', 1 ],
+       [ 'Q Tip (Producer)', 'Busta Rhymes', 1 ],
+       [ 'Madlib (Producer)', 'Blu/MED/Madlib', 1 ],
+       [ '9th Wonder (Producer)', '9th Wonder', 1 ],
+       [ 'Carl Mo (Producer)', 'Big Boi/Bun B/Big Gee', 1 ],
+       [ 'Blu/MED/Madlib', 'Burgundy Whip', 1 ],
+       [ 'Prince Paul/Breeze Brewin/Sha', 'Pain', 1 ],
+       [ '9th Wonder', 'A Glimmer', 1 ],
+       [ 'Big Boi/Bun B/Big Gee','808', 1 ],
+       [ 'Nas', 'U Gotta Love It', 1 ],
+       [ 'A Tribe Called Quest', 'Skypager', 1 ],
+       [ 'A Tribe Called Quest', 'Lyrics to Go', 1 ],
+       [ 'A Tribe Called Quest', 'Electric Relaxation', 1 ],
+       [ 'Beatnuts', 'Finger Smoke', 1 ],
+       [ 'Dilated Peoples', 'Worst Comes to Worst', 1 ],
+       [ 'De La Soul', 'Voodoo Circus', 1 ],
+       [ 'De La Soul', 'Stakes is High', 1 ],
+       [ 'De La Soul', 'Much More', 1 ],
+       [ 'Busta Rhymes', 'Ill Vibe (Jay Dee remix)', 1 ],
+       [ 'Lucy Pearl', 'Without You (Jay Dee remix)', 1 ],
+       [ 'Q Tip', 'Getting Up', 1 ],
+       [ 'Mobb Deep', 'Drink Away the Pain', 1 ],
+       [ 'Busta Rhymes', 'Ill Vibe', 1 ]
+
+    ]);
+
+    // Set chart options
+    //var colors = ['#a6cee3', '#b2df8a', '#fb9a99', '#fdbf6f',
+                 //'#cab2d6', '#ffff99', '#1f78b4', '#33a02c'];
+
+   var options = {
+     //height: 800,
+     sankey: { node: { nodePadding: 11 },
+               node: {label: { fontName: 'Arial',
+                        fontSize: 14,
+                        color: '#000000',
+                        // bold: true,
+                        // italic: true
+                      } }},
+
+     //sankey: {
+       //: {
+         //colors: colors
+       //},
+       //link: {
+         //colorMode: 'gradient',
+         //colors: colors
+       //}
+     //}
+   };
+
+    // Instantiate and draw our chart, passing in some options.
+    var chart = new google.visualization.Sankey(document.getElementById('sankey_multiple'));
+    chart.draw(data, options);
+   }
+</script>
+#3BarLoops
+</body>
+</html>

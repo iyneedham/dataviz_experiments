@@ -1,0 +1,17 @@
+body {
+  margin: 0;
+  display: table;
+  height: 100%;
+  width: 100%;
+  font: 24px/134% Helvetica Neue, sans-serif;
+}
+
+#left {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+#fig {
+  position: relative;
+  margin: auto;
+}

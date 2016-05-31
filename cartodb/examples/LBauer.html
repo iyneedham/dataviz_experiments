@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.11/themes/css/cartodb.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src="http://libs.cartocdn.com/cartodb.js/v3/3.11/cartodb.js"></script>
+</head>
+<body>
+<h2>2014-2015 Author Distribution by Country</h2>
+<div class="container">
+
+  <form class="" action="index.html" method="post">
+
+  <div class="dropdown">
+<p>Select journal title from dropdown menu</p>
+    <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Journal
+    <span class="caret"></span></button>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">AJA</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">AJSLP</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">JSLHR</a></li>
+      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">LSHSS</a></li>
+    </ul>
+  </div>
+</div>
+
+
+
+<button type="button" onclick="changeYear()">2014</button>
+<button type="button" onclick="changeYear()">2015</button>
+
+<!-- <body onload="init()">
+  <div id='map'></div>
+  <div id='menu'>
+    <a href="#2015" id="jslhr2015" class="button 2015">2015</a>
+    <a href="#2014" id="jslhr2014" class="button 2014">2014</a>
+  </div>
+</body> -->
+
+</form>
+
+<iframe width="100%" height="800" frameborder="0" src="https://iyneedham.cartodb.com/viz/b7d344f6-7c21-11e5-9f13-0e674067d321/embed_map" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
+
+<iframe width="100%" height="800" frameborder="0" src="https://iyneedham.cartodb.com/viz/37e61afe-78f0-11e5-8765-0e5db1731f59/embed_map" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
+
+<!-- <h2 id="test">JSLHR</h2>
+
+
+
+
+<iframe id="JSLHR_2015" width="585" height="450" scrolling="no" frameborder="no" src="https://www.google.com/fusiontables/embedviz?viz=GVIZ&amp;t=MAP&amp;gco_region=world&amp;gco_dataMode=regions&amp;containerId=googft-gviz-canvas&amp;q=select+gvizcountry(col0)%2C+col2%2C+col0+from+1gSmZOy9b2NeOpUztAj__wC2bWVSttbrxA9ZYB4CU+where+col2+%3E+&#39;0&#39;&amp;qrs=+and+gvizcountry(col0)+%3E%3D+&amp;qre=+and+gvizcountry(col0)+%3C%3D+&amp;qe=+limit+16&amp;att=true&amp;width=800&amp;height=585"></iframe>
+<iframe width="585" height="450" scrolling="no" frameborder="no" src="https://www.google.com/fusiontables/embedviz?viz=GVIZ&amp;t=MAP&amp;gco_region=world&amp;gco_dataMode=regions&amp;containerId=googft-gviz-canvas&amp;q=select+gvizcountry(col0)%2C+col3%2C+col0+from+1OjFwIljTT37roWWjzoZTLnUyqhH11VemJZKjF_c6+where+col3+%3E+&#39;0&#39;&amp;qrs=+and+gvizcountry(col0)+%3E%3D+&amp;qre=+and+gvizcountry(col0)+%3C%3D+&amp;qe=+limit+29&amp;att=true&amp;width=800&amp;height=585"></iframe>
+
+<h2>AJA</h2>
+
+<iframe width="585" height="450" scrolling="no" frameborder="no" src="https://www.google.com/fusiontables/embedviz?viz=GVIZ&amp;t=MAP&amp;gco_region=world&amp;gco_dataMode=regions&amp;containerId=googft-gviz-canvas&amp;q=select+gvizcountry(col0)%2C+col8%2C+col0+from+12m8iMi3_G24rbbn-9Yx8POEBvU1JH5-YFnM1gtlq+where+col8+%3E+&#39;0&#39;&amp;qrs=+and+gvizcountry(col0)+%3E%3D+&amp;qre=+and+gvizcountry(col0)+%3C%3D+&amp;qe=+limit+8&amp;att=true&amp;width=585&amp;height=435"></iframe>
+<iframe width="585" height="450" scrolling="no" frameborder="no" src="https://www.google.com/fusiontables/embedviz?viz=GVIZ&amp;t=MAP&amp;gco_region=world&amp;gco_dataMode=regions&amp;containerId=googft-gviz-canvas&amp;q=select+gvizcountry(col0)%2C+col9%2C+col0+from+18Mq35z4viPTnIJkHq-No3NnOl4B3SlH4HsllYpSO+where+col9+%3E+&#39;0&#39;&amp;qrs=+and+gvizcountry(col0)+%3E%3D+&amp;qre=+and+gvizcountry(col0)+%3C%3D+&amp;qe=+limit+10&amp;att=true&amp;width=585&amp;height=435"></iframe>
+
+<h2>AJSLP</h2>
+
+<iframe width="585" height="450" scrolling="no" frameborder="no" src="https://www.google.com/fusiontables/embedviz?viz=GVIZ&amp;t=MAP&amp;gco_region=world&amp;gco_dataMode=regions&amp;containerId=googft-gviz-canvas&amp;q=select+gvizcountry(col0)%2C+col6%2C+col0+from+11k7zAIWw0eYje6bmPpKyMj9C6WUxmRgwHdwtvn2g+where+col6+%3E+&#39;0&#39;&amp;qrs=+and+gvizcountry(col0)+%3E%3D+&amp;qre=+and+gvizcountry(col0)+%3C%3D+&amp;qe=+limit+6&amp;att=true&amp;width=585&amp;height=435"></iframe>
+<iframe width="585" height="450" scrolling="no" frameborder="no" src="https://www.google.com/fusiontables/embedviz?viz=GVIZ&amp;t=MAP&amp;gco_region=world&amp;gco_dataMode=regions&amp;containerId=googft-gviz-canvas&amp;q=select+gvizcountry(col0)%2C+col7%2C+col0+from+1J34WegSDHPSrsb4L6o6z2JbL5O4RcvE58v9avj-z+where+col7+%3E+&#39;0&#39;&amp;qrs=+and+gvizcountry(col0)+%3E%3D+&amp;qre=+and+gvizcountry(col0)+%3C%3D+&amp;qe=+limit+6&amp;att=true&amp;width=585&amp;height=435"></iframe>
+
+<h2>LSHSS</h2>
+
+<iframe width="585" height="450" scrolling="no" frameborder="no" src="https://www.google.com/fusiontables/embedviz?viz=GVIZ&amp;t=MAP&amp;gco_region=world&amp;gco_dataMode=regions&amp;containerId=googft-gviz-canvas&amp;q=select+gvizcountry(col0)%2C+col4%2C+col0+from+1fyButA3YcJa01WWwJ5tWIomi4ZkfXZSUabdkWdI9+where+col4+%3E+&#39;0&#39;&amp;qrs=+and+gvizcountry(col0)+%3E%3D+&amp;qre=+and+gvizcountry(col0)+%3C%3D+&amp;qe=+limit+4&amp;att=true&amp;width=585&amp;height=435"></iframe>
+<iframe width="585" height="450" scrolling="no" frameborder="no" src="https://www.google.com/fusiontables/embedviz?viz=GVIZ&amp;t=MAP&amp;gco_region=world&amp;gco_dataMode=regions&amp;containerId=googft-gviz-canvas&amp;q=select+gvizcountry(col0)%2C+col5%2C+col0+from+17AdnDYpkPgjmXVRIiVDZR7HomoEKsTBqvH3Mpy8r+where+col5+%3E+&#39;0&#39;&amp;qrs=+and+gvizcountry(col0)+%3E%3D+&amp;qre=+and+gvizcountry(col0)+%3C%3D+&amp;qe=+limit+4&amp;att=true&amp;width=585&amp;height=435"></iframe> -->
+
+<script type="text/javascript">
+function changeYear(){
+  d3.select("#JSLHR_2015").attr("src", "https://iyneedham.cartodb.com/viz/2263142a-7c1f-11e5-9922-0e5db1731f59/embed_map");
+  //d3.select("#JSLHR_2015").style("opacity", 0);
+}
+
+// var layerUrl = 'http://documentation.cartodb.com/api/v2/viz/9af23dd8-ea10-11e2-b5ac-5404a6a683d5/viz.json';
+
+var sublayers = [];
+
+ cartodb.createLayer(map, layerUrl)
+   .addTo(map)
+   .on('done', function(layer) {
+     // change the query for the first layer
+     var subLayerOptions = {
+       sql: "SELECT * FROM jslhr2015",
+       cartocss: "#jslhr2015{
+         polygon-fill: #FFFFCC;
+         polygon-opacity: 0.8;
+         line-color: #FFF;
+         line-width: 0.5;
+         line-opacity: 1;
+       }
+       #jslhr2015 [ _2015jslhr <= 275] {
+          polygon-fill: #0C2C84;
+       }
+       #jslhr2015 [ _2015jslhr <= 25] {
+          polygon-fill: #225EA8;
+       }
+       #jslhr2015 [ _2015jslhr <= 15] {
+          polygon-fill: #1D91C0;
+       }
+       #jslhr2015 [ _2015jslhr <= 11] {
+          polygon-fill: #41B6C4;
+       }
+       #jslhr2015 [ _2015jslhr <= 8] {
+          polygon-fill: #7FCDBB;
+       }
+       #jslhr2015 [ _2015jslhr <= 4] {
+          polygon-fill: #C7E9B4;
+       }
+       #jslhr2015 [ _2015jslhr <= 2] {
+          polygon-fill: #FFFFCC;
+       }
+
+ }"
+
+   var sublayer = layer.getSubLayer(0);
+
+     sublayer.set(subLayerOptions);
+
+    sublayers.push(sublayer);
+   }).on('error', function() {
+     //log the error
+   });
+
+ var LayerActions = {
+   2015: function(){
+     sublayers[0].setSQL("SELECT * FROM jslhr2015");
+     return true;
+
+  2014: function(){
+     sublayers[0].setSQL("SELECT * FROM jslhr2014");
+     return true;
+   }
+ }
+
+ $('.button').click(function() {
+   $('.button').removeClass('selected');
+   $(this).addClass('selected');
+
+     LayerActions[$(this).attr('id')]();
+   });
+
+  }
+</script>
+
+</body>
+</html>
+
+
+<!-- http://blog.cartodb.com/pollution-map/ -->
+ <!-- http://epi.yale.edu/pollution-map/ -->

@@ -1,0 +1,199 @@
+<html>
+<head>
+  <title>Drawing parallel edges</title>
+  <meta charset="utf-8" />
+<script src="C:/Github/dataviz_experiments/3barloops/3barloops_network/d3.min.js" charset="utf-8" type="text/javascript"></script>
+</head>
+<style>
+  svg {
+    height: 750px;
+    width: 750px;
+    border: 1px solid gray;
+  }
+</style>
+<body>
+
+<div id="viz">
+  <svg>
+  </svg>
+</div>
+</body>
+  <footer>
+<script>
+
+d3.csv("C:/Github/dataviz_experiments/3barloops/3barloops_network/clinton.csv",function(error,data) {createNetwork(data)});
+
+function offsetEdge(d, sourceSize, targetSize) {
+  var sourceCirc = sourceSize * 2 * Math.PI;
+  var targetCirc = targetSize * 2 * Math.PI;
+  var stRatio = sourceCirc/targetCirc;
+
+  var diffX = d.target.y - d.source.y;
+  var diffY = d.target.x - d.source.x;
+
+  var angle0 = ( Math.atan2( diffY, diffX ) + ( Math.PI / 2 ) );
+  var angle1 = angle0 + ( (Math.PI * 0.75) + (d.edgeNumber * 0.25) );
+  var angle2 = angle0 + ( (Math.PI * 0.25) - (d.edgeNumber * 0.25) );
+
+  var x1 = d.source.x + (sourceSize * Math.cos(angle1));
+  var y1 = d.source.y - (sourceSize * Math.sin(angle1));
+  var x2 = d.target.x + (targetSize * Math.cos(angle2));
+  var y2 = d.target.y - (targetSize * Math.sin(angle2));
+
+  return {x1: x1, y1: y1, x2: x2, y2: y2}
+
+}
+
+function createNetwork(edgelist) {
+  var nodeHash = {};
+  var edgeHash = {};
+  var nodes = [];
+  var edges = [];
+
+  var marker = d3.select("svg").append('defs')
+    .append('marker')
+    .attr("id", "Triangle")
+    .attr("refX", 6)
+    .attr("refY", 3)
+    .attr("markerUnits", 'userSpaceOnUse')
+    .attr("markerWidth", 6)
+    .attr("markerHeight", 9)
+    .attr("orient", 'auto')
+    .append('path')
+    .style("fill", "#dddddd")
+    .attr("d", 'M 0 0 6 3 0 6 1.5 3');
+
+  edgelist.forEach(function (edge, i) {
+    if (!nodeHash[edge.source]) {
+      nodeHash[edge.source] = {id: edge.source, label: edge.source};
+      nodes.push(nodeHash[edge.source]);
+    }
+    if (!nodeHash[edge.target]) {
+      nodeHash[edge.target] = {id: edge.target, label: edge.target};
+      nodes.push(nodeHash[edge.target]);
+    }
+    edges.push({source: nodeHash[edge.source], target: nodeHash[edge.target], weight: 1, edgeNumber: edge.edgeNumber});
+  });
+  createForceNetwork(nodes, edges);
+}
+
+function createForceNetwork(nodes, edges) {
+
+//create a network from an edgelist
+var sizeScale = d3.scale.linear().domain([1,20]).range([20,40]);
+
+  var force = d3.layout.force().nodes(nodes).links(edges)
+  .size([750,750])
+  .charge(function (d) {return d.weight * -200})
+  .linkDistance(100)
+  .gravity(.05)
+  .on("tick", updateNetwork);
+
+  d3.select("svg").selectAll("line")
+  .data(edges)
+  .enter()
+  .append("line")
+  .style("stroke-width", "1px")
+  .style("stroke", "#dddddd")
+  .attr("marker-end", "url(#Triangle)");
+
+  var nodeEnter = d3.select("svg").selectAll("g")
+  .data(nodes)
+  .enter()
+  .append("g")
+  .attr("class", "node")
+  .call(force.drag());
+
+  nodeEnter.append("circle")
+  .attr("class", "node")
+  .style("fill", "#476fa3")
+  .style("stroke", "white")
+  .style("stroke-width", "1px");
+
+  nodeEnter.append("text")
+  .style("fill", "#0e1f3d")
+  .style("text-anchor", "middle")
+  .text(function (d) {return d.id});
+
+  force.start();
+
+  function updateNetwork() {
+    d3.select("svg").selectAll("line").each(function (d) {
+      var startCoords = offsetEdge(d, sizeScale(d.source.weight), sizeScale(d.target.weight));
+      d3.select(this)
+      .attr("x1", startCoords.x1)
+      .attr("y1", startCoords.y1)
+      .attr("x2", startCoords.x2)
+      .attr("y2", startCoords.y2)
+    })
+
+    d3.select("svg").selectAll("circle.node")
+      .attr("r", function (d) {return sizeScale(d.weight)});
+
+    d3.select("svg").selectAll("g.node")
+      .attr("transform", function (d) {return "translate(" + d.x + "," + d.y + ")"});
+  }
+
+
+
+}
+</script>
+  </footer>
+
+</html>
+<!-- clinton.csv#
+
+source,target,edgeNumber
+"Clinton '92","Clinton Admin",1
+"Clinton '92","Clinton Admin",2
+"Clinton '92","Clinton Admin",3
+"Clinton '92","Kerry '04",1
+"Clinton '96","Clinton Admin",1
+"Clinton '96","Obama '08",1
+"Clinton Admin","Clinton '96",1
+"Clinton Admin","Clinton Senate '00",1
+"Clinton Admin","Clinton Senate '00",2
+"Clinton Admin","Edwards '04",1
+"Clinton Senate '00","Clinton '08",1
+"Edwards '04","Kerry '04",1
+"Dean '04","Kerry '04",1
+"Kerry '04","Clinton '08",1
+"Obama '08","Obama '12",1
+"Obama '08","Obama '12",2
+"Obama '08","Obama '12",3
+"Obama '08","Obama '12",4
+"Obama '08","Obama '12",5
+"Obama '08","Obama Admin",1
+"Obama '08","Obama Admin",2
+"Obama '08","Obama Admin",3
+"Obama '08","McCauliffe '13",1
+"Obama '08","Clinton State Dept",1
+"Clinton '08","Obama '08",1
+"Clinton '08","Obama '08",2
+"Clinton '08","Obama '12",1
+"Clinton '08","Obama '12",2
+"Clinton '08","Center for Amer Progress",1
+"Clinton '08","Obama Admin",1
+"Clinton '08","Sen Clinton",1
+"Clinton '08","Clinton State Dept",1
+"Clinton '08","Clinton State Dept",2
+"Clinton '08","Clinton State Dept",3
+"Clinton '08","Clinton State Dept",4
+"Clinton '08","Priorities USA",1
+"Clinton '08","Priorities USA",2
+"Clinton '08","Priorities USA",3
+"Clinton '08","Priorities USA",4
+"Obama '12","Obama Admin",1
+"Obama '12","Priorities USA",1
+"Obama '12","Priorities USA",2
+"Obama '12","Center for Amer Progress",1
+"Obama Admin","Obama '12",1
+"Obama Admin","Obama '12",2
+"Obama Admin","Priorities USA",1
+"Center for Amer Progress","Priorities USA",1
+"Sen Clinton","Clinton State Dept",1
+"Sen Clinton","Clinton '08",1
+"Sen Clinton","Clinton '08",2
+"Clinton State Dept","Clinton Found",1
+"Clinton State Dept","Clinton Found",2
+"Clinton State Dept","Clinton Found",3 -->
